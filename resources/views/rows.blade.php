@@ -19,16 +19,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
-                                {{-- TÂCHE : seules les lignes paires (2e, 4e, etc.) doivent avoir la classe CSS "bg-red-100" --}}
-                                <tr class="bg-red-100">
-                                    <td>{{-- TÂCHE : ajoutez ici le numéro de ligne : 1, 2, etc. --}}</td>
-                                    <td>{{ $user->name }}</td>
-                                    {{-- TÂCHE : seule la PREMIÈRE ligne doit avoir l'email avec la classe "font-bold" --}}
-                                    <td class="font-bold">{{ $user->email }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach ($users as $index => $user)
+                            <tr class="{{ $index % 2 == 1 ? 'bg-red-100' : '' }}">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td class="{{ $index == 0 ? 'font-bold' : '' }}">{{ $user->email }}</td>
+                                <td>{{ $user->created_at }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
